@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Social Publisher Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Local social ops</p>
+          <h1>Subi, generá caption y mandá contenido sin abrir cinco pestañas.</h1>
+          <p class="hero-copy">Instagram publica directo. TikTok manda el video al inbox para revisar y postear manualmente.</p>
+        </div>
+        <div class="status-card" id="statusCard">Cargando estado...</div>
+      </section>
+
+      <form class="logout" method="post" action="/api/logout">
+        <button type="submit">Cerrar sesion</button>
+      </form>
+
+      <section class="grid">
+        <form class="panel composer" id="composerForm">
+          <div class="field">
+            <label for="media">Media</label>
+            <input id="media" name="media" type="file" accept="image/*,video/mp4" required />
+          </div>
+
+          <div class="field">
+            <label for="idea">Idea del post</label>
+            <textarea id="idea" name="idea" rows="3" placeholder="Ej: mostrar como la app ahorra tiempo creando contenido UGC"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="extraContext">Contexto extra</label>
+            <textarea id="extraContext" name="extraContext" rows="3" placeholder="Oferta, publico, CTA, restricciones, tono..."></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="button" id="generateCaption">Generar caption</button>
+            <button type="button" id="copyCaption">Copiar caption</button>
+          </div>
+
+          <div class="field">
+            <label for="caption">Caption final</label>
+            <textarea id="caption" name="caption" rows="8" placeholder="La IA la genera aca, pero editala antes de publicar. No seas vago."></textarea>
+          </div>
+
+          <fieldset class="platforms">
+            <legend>Destino</legend>
+            <label><input type="checkbox" name="platforms" value="instagram" checked /> Instagram directo</label>
+            <label><input type="checkbox" name="platforms" value="tiktok" /> TikTok inbox</label>
+          </fieldset>
+
+          <button class="publish" type="submit">Publicar / enviar</button>
+        </form>
+
+        <aside class="panel result-panel">
+          <h2>TikTok OAuth</h2>
+          <div class="oauth-box" id="tiktokOAuth">Cargando TikTok...</div>
+          <h2>Resultado</h2>
+          <pre id="result">Todavia no hiciste nada.</pre>
+          <h2>Historial</h2>
+          <div id="history" class="history"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

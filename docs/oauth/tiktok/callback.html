@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connecting TikTok - Social Publisher Dashboard</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <article class="legal">
+        <p class="eyebrow">TikTok OAuth</p>
+        <h1>Connecting TikTok...</h1>
+        <p id="message">Sending the authorization code back to your local dashboard.</p>
+        <p>If nothing happens, make sure your local dashboard is running at <code>http://localhost:4317</code>.</p>
+      </article>
+    </main>
+
+    <script>
+      const target = new URL('http://localhost:4317/auth/tiktok/callback');
+      const source = new URL(window.location.href);
+
+      for (const [key, value] of source.searchParams.entries()) {
+        target.searchParams.set(key, value);
+      }
+
+      document.querySelector('#message').textContent = `Redirecting to ${target.toString()}`;
+      window.location.replace(target.toString());
+    </script>
+  </body>
+</html>
